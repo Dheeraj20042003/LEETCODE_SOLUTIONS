@@ -1,0 +1,51 @@
+class Solution {
+public:
+
+bool dfs(vector<int>adj[] , int node , vector<int>&vis , vector<int>&vis_dep)
+{
+     if(vis_dep[node])
+     return false;
+     
+     if(vis[node])
+     return true;
+
+
+     vis_dep[node] = vis[node] = 1;
+      for(auto it:adj[node])
+      {
+       
+           if(!dfs(adj , it , vis , vis_dep))
+           return false;
+   
+        }
+
+      vis_dep[node]=0;
+      return true;
+}
+
+ bool canFinish(int numCourses, vector<vector<int>>& pre) {
+        
+          vector<int>vis(numCourses,0);
+          vector<int>vis_dep(numCourses , 0);
+          vector<int>adj[numCourses];
+
+          for(int i=0;i<pre.size();i++)
+          {
+              adj[pre[i][0]].push_back(pre[i][1]);
+
+          }
+        
+        for(int i=0;i<numCourses;i++)
+         {
+             if(!vis[i])
+              {
+                  if(!dfs(adj , i , vis , vis_dep))
+                  return false;
+              }
+
+         }
+        
+        return true;
+          
+    }
+};
