@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int longestSubsequence(vector<int>& arr, int difference) {
+        
+        int ans=0;
+         unordered_map<int,int>dp;
+        
+        for(auto it:arr)
+         {
+             dp[it] = dp[it-difference] + 1;
+
+             ans = max(ans , dp[it]);
+         }
+      
+      return ans;
+    }
+};
