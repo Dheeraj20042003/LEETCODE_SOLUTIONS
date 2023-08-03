@@ -1,0 +1,32 @@
+class Solution {
+public:
+    
+    void solve(string digits , vector<string>&sol , string ans , int index , string map[])
+    {
+        if(index >= digits.length())
+        {
+            sol.push_back(ans);
+            return;
+        }
+        int num = digits[index] - '0' ; 
+        string val = map[num];
+        for(int i=0;i<val.length();i++)
+        {
+              ans.push_back(val[i]);
+              solve(digits,sol,ans,index+1,map);
+              ans.pop_back();
+        }
+        
+    }
+    vector<string> letterCombinations(string digits) {
+        
+         vector<string>sol;
+        if(digits.size()==0)
+            return sol;
+          string ans = "";
+        int index = 0;
+        string map[10] = {" "," ", "abc", "def" , "ghi" , "jkl" ,"mno" , "pqrs","tuv" , "wxyz"};
+        solve(digits,sol,ans,index,map);
+        return sol;
+    }
+};
