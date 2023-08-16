@@ -1,0 +1,32 @@
+class Solution {
+public:
+    int accountBalanceAfterPurchase(int amount) { 
+       
+        if(amount == 0)
+        {
+            return 100;
+        }
+       if(amount%10 == 0)
+       {   
+            return 100-amount;
+       }
+       else if(amount%5 == 0)
+        {
+            amount = amount+5;
+        }
+        else if(amount%10 > 5)
+        {
+            amount = amount/10;
+            amount++;
+            amount*=10;
+        }
+        else
+        {
+            amount = amount/10;
+            amount*=10;
+        }
+       
+      
+    return 100-amount;
+    }
+};
