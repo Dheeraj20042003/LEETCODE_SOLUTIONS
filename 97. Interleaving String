@@ -1,0 +1,59 @@
+class Solution {
+public:
+    
+     bool solve(string &s1  , int i , string &s2 , int j , string &s3  , string temp , vector<vector<int>>&dp)
+     {
+        
+      if(i >= s1.size())
+      {
+           while(j < s2.size())
+            {
+                  temp += s2[j] ;
+                  j++;
+            }
+          if(temp == s3)
+           return true;
+        
+        return false;
+      }
+      
+    if(j >= s2.size())
+    {
+        while(i<s1.size())
+        {
+            temp += s1[i];
+            i++;
+        }
+        if(temp == s3)
+           return true;
+        
+        return false;
+    }
+    
+    if(dp[i][j] != - 1)
+        return dp[i][j];
+      bool incl;
+      bool incl1;
+
+        if(s1[i] == s3[i+j])
+        {
+             incl =  solve(s1 , i+1 , s2 , j , s3 , temp+s1[i] , dp);
+        }
+        if(s2[j] == s3[i+j])
+        {
+            incl1 = solve(s1 , i , s2 , j+1 , s3  , temp+s2[j] , dp);
+        }
+     
+    
+      return dp[i][j] = incl or incl1;
+           
+     }
+    bool isInterleave(string s1, string s2, string s3) {
+         
+         string temp = "";
+         int n = s1.size();
+         int m = s2.size();
+         vector<vector<int>>dp(n+1 , vector<int>(m+1 , -1));
+         return solve(s1 ,  0 , s2 , 0 , s3 ,  temp , dp);
+    }
+};
