@@ -1,0 +1,33 @@
+class Solution {
+public:
+    int furthestDistanceFromOrigin(string moves) { 
+      
+      int a=0,b=0;
+      int n = moves.size();
+      for(int i=0;i<moves.size();i++)
+      {
+           if(moves[i] == 'L')
+           {
+               a++;
+           }
+        else if(moves[i] == 'R')
+        {
+            b++;
+        }
+      }
+     
+   
+   int empty = n -( a+b);
+   int ans;
+
+   if(a > b)
+     ans = empty + (a-b);
+  else
+  ans = empty + (b-a);
+  
+
+  return abs(ans);
+    }
+};
+
+
