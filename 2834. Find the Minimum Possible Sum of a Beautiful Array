@@ -1,0 +1,32 @@
+class Solution {
+public:
+    long long minimumPossibleSum(int n, int target) {
+      
+        unordered_map<int,int>mp;
+        int t=1;
+        vector<int>arr;
+        int i=0;
+
+        while(i<n)
+        {    
+            
+            if(mp.find(t) == mp.end())
+            {      
+                  arr.push_back(t);
+                  i++;
+            }
+          
+          mp[t]++;
+          mp[target-t]++;
+          t++;
+        }
+      
+      long long ans=0;
+      for(int i=0;i<n;i++)
+      {
+          ans+=arr[i];
+      }
+
+    return ans;
+    }
+};
