@@ -1,0 +1,20 @@
+class Solution {
+public:
+    vector<int> countBits(int n) {
+       
+       vector<int>ans(n+1);
+       if(n==0)
+           ans[0] = 0;
+      
+    
+
+     for(int i=1;i<=n;i++)
+     {
+          int t =  ans[i/2] + i%2;
+          ans[i] = t;
+  
+       }
+
+     return ans;
+    }
+};
