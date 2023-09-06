@@ -1,0 +1,100 @@
+ /**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    vector<ListNode*> splitListToParts(ListNode* head, int k) {
+        
+        vector<ListNode*>ans;
+
+        int c=0;
+        int temp=k;
+
+        ListNode*p=head,*q,*tail;
+        while(p)
+        {
+            c++;
+            p=p->next;
+        }
+      
+       p = head;
+
+       if(temp >= c)
+       {
+              while(p)
+              {  
+                  q=p;
+                  p=p->next;
+                  q->next=NULL;
+                  ans.push_back(q);
+                  temp--;
+              }
+            while(temp)
+            {
+                ans.push_back(NULL);
+                  temp--;
+            }
+       }
+       else
+       {
+              p = head;
+              int rem = c%k;
+              int temp;
+              int s = c/k;
+
+              while(p)
+              {
+                      temp=s;
+                     q=tail=NULL;
+                      while(p && temp)
+                      {   
+                           if(q==NULL)
+                             {
+                                  q=p;
+                                  tail=p;  
+                                p=p->next; 
+                                  tail->next=NULL;  
+                                                              
+                             }
+                            else
+                            {
+                                tail->next=p;
+                                tail=p;
+                                p=p->next;
+                                tail->next=NULL;
+                            }
+
+                            temp--;
+                      }
+
+                      if(rem > 0)
+                      {    
+                        
+                           tail->next=p;
+                           p=p->next;
+                           tail=tail->next;
+                           tail->next=NULL;
+                           rem--;
+                      }
+
+                     
+                   ans.push_back(q);
+
+              }
+
+       }
+
+
+
+       return ans;
+    }
+};
+
+
