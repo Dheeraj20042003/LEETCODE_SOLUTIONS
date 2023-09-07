@@ -1,0 +1,108 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    
+    ListNode* reverse(ListNode*root)
+    {
+        ListNode*p,*q,*r;
+        p=root;
+        q=r=NULL;
+        while(p)
+        {
+            q=p;
+            p=p->next;
+            q->next=r;
+            r=q;
+            
+        }
+        
+        return r;
+    }
+    ListNode* reverseBetween(ListNode* head, int left, int right) {
+        if(left==right)
+            return head;
+        ListNode*curr,*prev,*p,*q,*r,*len;
+         curr=NULL;
+        prev=NULL;
+        q=NULL;
+             
+        p=head;
+        
+        int c=1;
+       
+        while(p!=NULL)
+        {
+            
+            if(c<left)
+            {
+                q=p;
+                p=p->next;
+            }
+            else
+            {
+                
+                if(curr == NULL)
+                {
+                    curr =  p;
+                   
+                }
+                else
+                {
+                    prev->next = p;
+                   
+                }
+                prev = p;
+                p=p->next;
+                prev->next = NULL;
+                
+                
+                if(c==right)
+                {   
+                    curr = reverse(curr); 
+                    r = curr;
+                    while(r->next!=NULL)
+                    {
+                        r=r->next;
+                    }
+                   
+                    r->next = p;
+                    if(q!=NULL)
+                    {
+                      q->next = curr;
+                        return head;
+                    }
+                    
+                    return curr ;
+                }
+            
+            }
+            
+          
+         c++;
+            
+            
+        }
+        
+       curr = reverse(curr);
+        if(q!=NULL)
+        {
+          q->next = curr;
+        }
+        curr->next =p;
+        
+        return head;
+        
+      
+        
+    
+    }
+};
