@@ -1,0 +1,40 @@
+class Solution {
+public:
+    int compress(vector<char>& chars) {
+        
+        string s="";
+        int c=1;
+        int i;
+        for( i=0;i<chars.size()-1;i++)
+        {
+             if(chars[i] == chars[i+1])
+              {
+                    c++;
+              }
+            else 
+            {
+                  s = s + chars[i];
+                  if(c > 1) 
+                    s = s + to_string(c)  ;
+
+                    c = 1;
+            }
+        }
+
+        
+        s = s + chars[i];
+
+        if( c > 1)
+         {
+             s = s +  to_string(c);
+         }
+        
+      for( i=0;i<s.size();i++)
+      {
+          chars[i] = s[i]; 
+      }
+
+
+        return s.size();
+    }
+};
